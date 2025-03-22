@@ -1,6 +1,5 @@
 package org.example.tp3.entities;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +13,8 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor // This will generate the no-arguments constructor
 @Builder
 public class Patient {
     @Id

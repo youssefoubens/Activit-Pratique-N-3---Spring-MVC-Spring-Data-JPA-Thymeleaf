@@ -49,5 +49,7 @@ public class Tp3Application implements CommandLineRunner {
         patientRepository.save(patient3);
 
         System.out.println("Sample patients added to the database!");
-    }
+  }
+
+
 }

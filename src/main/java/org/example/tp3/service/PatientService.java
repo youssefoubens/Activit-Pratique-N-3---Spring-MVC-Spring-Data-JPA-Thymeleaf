@@ -5,6 +5,8 @@ import org.example.tp3.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,13 +25,15 @@ public class PatientService {
 
     // Get patients with pagination
     public Page<Patient> getPatientsPaginated(int page, int size) {
-        return patientRepository.findAll(PageRequest.of(page, size));
+        return patientRepository.findAll(PageRequest.of(page,size));
     }
 
     // Search patients by name (ignoring case)
     public List<Patient> searchPatientsByName(String name) {
-        return patientRepository.findByNomContainingIgnoreCase(name);
+        return patientRepository.findByNameContainingIgnoreCase(name);
     }
+
+
 
     // Delete patient by ID
     public void deletePatient(Long id) {
