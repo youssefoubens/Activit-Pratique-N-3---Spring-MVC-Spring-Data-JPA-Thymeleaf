@@ -27,7 +27,9 @@ public class PatientService {
     public Page<Patient> getPatientsPaginated(int page, int size) {
         return patientRepository.findAll(PageRequest.of(page,size));
     }
-
+    public Page<Patient> getPatientsPaginated(int page, int size, String search) {
+        return patientRepository.findByNameContainsIgnoreCase(search, PageRequest.of(page,size));
+    }
     // Search patients by name (ignoring case)
     public List<Patient> searchPatientsByName(String name) {
         return patientRepository.findByNameContainingIgnoreCase(name);

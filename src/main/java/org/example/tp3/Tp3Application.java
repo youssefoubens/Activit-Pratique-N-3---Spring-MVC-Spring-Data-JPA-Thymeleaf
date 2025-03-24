@@ -42,11 +42,18 @@ public class Tp3Application implements CommandLineRunner {
                 .malade(true)
                 .score(70)
                 .build();
+        Patient patient4 = Patient.builder()
+                .name("Michael Johnson")
+                .dateNaissance(LocalDate.of(2000, 11, 10))
+                .malade(true)
+                .score(70)
+                .build();
 
         // Saving the patients to the database
         patientRepository.save(patient1);
         patientRepository.save(patient2);
         patientRepository.save(patient3);
+        patientRepository.save(patient4);
 
         System.out.println("Sample patients added to the database!");
   }

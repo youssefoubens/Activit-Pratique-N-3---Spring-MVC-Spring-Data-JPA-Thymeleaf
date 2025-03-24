@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
     List<Patient> findByNameContainingIgnoreCase(String name);
-
+    Page<Patient> findByNameContainsIgnoreCase(String name, Pageable pageable);
 }

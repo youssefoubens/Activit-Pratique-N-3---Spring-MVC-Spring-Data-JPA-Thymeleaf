@@ -22,10 +22,11 @@ public class PatientController {
     @GetMapping
     public String showPatients(
             @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "5") int size,
+            @RequestParam(name = "size", defaultValue = "2") int size,
+            @RequestParam(name = "keyword",defaultValue = "") String kw,
 
             Model model) {
-        Page<Patient> patients = patientService.getPatientsPaginated(page, size);
+        Page<Patient> patients = patientService.getPatientsPaginated(page, size,kw);
         model.addAttribute("patients", patients.getContent());
         model.addAttribute("pages", new int[patients.getTotalPages()]);
         model.addAttribute("currentPage", page);
