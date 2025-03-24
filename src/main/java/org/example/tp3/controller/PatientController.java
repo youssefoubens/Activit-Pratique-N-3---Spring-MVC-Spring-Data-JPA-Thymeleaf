@@ -9,10 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
-@RequestMapping("/patients")
+@RequestMapping("/user/patients") // Restricted to users with "USER" role
 public class PatientController {
 
     @Autowired
@@ -23,14 +21,13 @@ public class PatientController {
     public String showPatients(
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "2") int size,
-            @RequestParam(name = "keyword",defaultValue = "") String kw,
-
+            @RequestParam(name = "keyword", defaultValue = "") String kw,
             Model model) {
-        Page<Patient> patients = patientService.getPatientsPaginated(page, size,kw);
+        Page<Patient> patients = patientService.getPatientsPaginated(page, size, kw);
         model.addAttribute("patients", patients.getContent());
         model.addAttribute("pages", new int[patients.getTotalPages()]);
         model.addAttribute("currentPage", page);
-        model.addAttribute("size", size); // Add this line
+        model.addAttribute("size", size);
 
         return "patients/list";  // Thymeleaf template: patients/list.html
     }
@@ -42,19 +39,23 @@ public class PatientController {
         return "patients/create";  // Thymeleaf template: patients/create.html
     }
 
+    // Redirect root patients URL to list
+    @GetMapping("/")
+    public String redirectToPatientsList() {
+        return "redirect:/user/patients";
+    }
+
     // Save a new patient
     @PostMapping("/save")
     public String savePatient(@ModelAttribute Patient patient) {
         patientService.savePatient(patient);
-        return "redirect:/patients";  // Redirect to the list page
+        return "redirect:/user/patients";  // Redirect to the list page
     }
 
-    // Delete a patient
+    // Delete a patient (Admin-only access)
     @GetMapping("/delete/{id}")
     public String deletePatient(@PathVariable Long id) {
         patientService.deletePatient(id);
-        return "redirect:/patients";  // Redirect to the list page
+        return "redirect:/user/patients";  // Redirect to the list page
     }
-
-    // Search patients by name (already implemented in showPatients)
 }
