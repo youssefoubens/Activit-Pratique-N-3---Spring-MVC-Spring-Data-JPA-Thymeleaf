@@ -1,41 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <title>Add Patient</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
-<body class="container mt-4">
+<body>
 
-<h2 class="mb-4">Add New Patient</h2>
 
-<form th:action="@{/patients/save}" method="post">
-    <div class="mb-3">
-        <label class="form-label">Name:</label>
-        <input type="text" name="name" class="form-control" required>
-    </div>
+<div   layout:fragment="content">
+    <h2 class="mb-4">Add New Patient</h2>
 
-    <div class="mb-3">
-        <label class="form-label">Sick:</label>
-        <select name="malade" class="form-control" required>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-        </select>
-    </div>
+    <form th:action="@{/user/patients/save}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Name:</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Score:</label>
-        <input type="number" name="score" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Sick:</label>
+            <select name="malade" class="form-control" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Date of Birth:</label>
-        <input type="date" name="dateNaissance" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Score:</label>
+            <input type="number" name="score" class="form-control" required>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a th:href="@{/patients}" class="btn btn-secondary">Cancel</a>
-</form>
+        <div class="mb-3">
+            <label class="form-label">Date of Birth:</label>
+            <input type="date" name="dateNaissance" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a th:href="@{/user/patients}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
